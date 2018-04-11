@@ -1,0 +1,9 @@
+/.idea
+/admin_wallet.iml
+/jarvis.iml
+/target/
+/logs/
+/src/main/resources/generatorConfig.xml
+/dump.rdb
+/resources/generatorConfig.xml
+

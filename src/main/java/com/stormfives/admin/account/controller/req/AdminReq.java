@@ -8,6 +8,8 @@ package com.stormfives.admin.account.controller.req;
  */
 public class AdminReq {
 
+    private Integer pageNum=1;
+
     private String password;
 
     private String phone;
@@ -46,5 +48,14 @@ public class AdminReq {
 
     public void setRealName(String realName) {
         this.realName = realName;
+    }
+
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
     }
 }

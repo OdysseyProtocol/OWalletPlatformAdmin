@@ -2,9 +2,8 @@ package com.stormfives.admin.account.dao;
 
 import com.stormfives.admin.account.dao.entity.Admin;
 import com.stormfives.admin.account.dao.entity.AdminExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface AdminMapper {
     int countByExample(AdminExample example);

@@ -15,7 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-
+/**
+ * Created with IntelliJ IDEA.
+ * User: lyc
+ * Date: 2018/3/14
+ * Time: 下午2:51
+ */
 @RestController
 @RequestMapping("/api/coin/")
 public class AdminController {
@@ -29,7 +34,11 @@ public class AdminController {
     private AdminService adminService;
 
 
-
+    /**
+     * 登录
+     *
+     * @return
+     */
     @PostMapping("v1/login")
     public TokenVo login(@RequestBody AdminReq adminReq, HttpServletRequest request) throws InvalidArgumentException {
 
@@ -37,7 +46,17 @@ public class AdminController {
     }
 
 
+    /**
+     * 刷新token
+     */
 
+    /**
+     * 新增admin-wallet 后台管理账户
+     *
+     * @param adminReq
+     * @param request
+     * @return
+     */
     @PostMapping("v1/admin-wallet")
     public ResponseValue addAdmin(@RequestBody AdminReq adminReq, HttpServletRequest request) throws InvalidArgumentException {
 
@@ -47,18 +66,26 @@ public class AdminController {
         try {
             success = adminService.addAdmin(adminReq.getName(), adminReq.getPassword(), adminReq.getPhone(), adminReq.getRealName(), adminId);
         } catch (InvalidArgumentException e) {
+            logger.error("新增用户逻辑异常!", e);
             return new FailResponse(e.getMessage());
         } catch (Exception e) {
+            logger.error("新增用户程序异常!", e);
         }
 
         if (success)
             return new SuccessResponse("message", messageSourceUtil.getMessage("success"));
 
-        return new FailResponse("fail");
+        return new FailResponse("新增账户失败");
     }
 
 
-
+    /**
+     * 修改密码
+     *
+     * @param adminReq
+     * @param request
+     * @return
+     */
     @PutMapping("v1/admin-pwd")
     public ResponseValue resetPassword(@RequestBody AdminReq adminReq, HttpServletRequest request) {
 
@@ -69,15 +96,17 @@ public class AdminController {
             success = adminService.resetPassword(adminId, adminReq.getPassword(), adminReq.getName());
 
         } catch (InvalidArgumentException e) {
+            logger.error("修改密码逻辑异常!", e);
             return new FailResponse(e.getMessage());
 
         } catch (Exception e) {
+            logger.error("修改密码程序异常!", e);
         }
 
         if (success)
             return new SuccessResponse("message", messageSourceUtil.getMessage("success"));
 
-        return new FailResponse("err!");
+        return new FailResponse("修改密码失败!");
     }
 
 
